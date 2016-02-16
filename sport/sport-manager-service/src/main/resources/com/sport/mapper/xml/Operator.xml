@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.OperatorMapper">
+	<insert id="add" parameterType="Operator">
+		insert into ${tablename} (name,sex,phone,address,email,loginname,password,roleid,adate) values(#{name},#{sex},#{phone},#{address},#{email},#{loginname},#{password},#{roleid},#{adate})
+	</insert>
+	
+	<select id="get" parameterType="Operator" resultType="Operator">
+		select id,name,sex,phone,address,email,loginname,password,roleid,adate from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Operator">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Operator">
+		update ${tablename} set name = #{name},sex = #{sex},phone = #{phone},address = #{address},email = #{email},loginname = #{loginname},password = #{password},roleid = #{roleid} where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Operator" resultType="Operator">
+		select id,name,sex,phone,address,email,loginname,password,roleid,adate from ${tablename}  where 1=1
+		
+		<if test="name != null and name != ''" >
+			<![CDATA[
+				and name like CONCAT('','${name}','%')
+			]]>
+		</if>
+		
+		<if test="phone != null and phone != ''" >
+			<![CDATA[
+				and phone = #{phone} 
+			]]>
+		</if>
+		
+		<if test="loginname != null and loginname != ''" >
+			<![CDATA[
+				and loginname = #{loginname} 
+			]]>
+		</if>
+		
+		<if test="startadate != null and startadate != ''">
+			<![CDATA[
+			and adate >= #{startadate}
+			]]>
+		</if>
+		<if test="endadate != null and endadate != ''">
+			<![CDATA[
+			and adate <= #{endadate}
+			]]>
+		</if>
+		
+		<if test="roleid != 0" >
+			<![CDATA[
+				and roleid = #{roleid} 
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Operator" resultType="java.lang.Integer">
+		select count(1) from ${tablename}  where 1=1
+		
+		<if test="name != null and name != ''" >
+			<![CDATA[
+				and name like CONCAT('','${name}','%')
+			]]>
+		</if>
+		
+		<if test="loginname != null and loginname != ''" >
+			<![CDATA[
+				and loginname = #{loginname} 
+			]]>
+		</if>
+		
+		<if test="phone != null and phone != ''" >
+			<![CDATA[
+				and phone = #{phone} 
+			]]>
+		</if>
+		
+		<if test="startadate != null and startadate != ''">
+			<![CDATA[
+			and adate >= #{startadate}
+			]]>
+		</if>
+		<if test="endadate != null and endadate != ''">
+			<![CDATA[
+			and adate <= #{endadate}
+			]]>
+		</if>
+	</select>
+	
+	
+	<select id="login" parameterType="Operator" resultType="Operator">
+		select id,name,sex,phone,address,email,loginname,password,roleid,adate from ${tablename}  where loginname = #{loginname} and password = #{password}
+	</select>
+</mapper>

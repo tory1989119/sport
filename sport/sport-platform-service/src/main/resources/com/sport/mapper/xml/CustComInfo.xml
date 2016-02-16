@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.CustComInfoMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="CustComInfo" resultType="CustComInfo">
+		<![CDATA[
+		SELECT 
+				ID id,
+				ACCT_ID acctId,
+				COM_NAME comName,
+				COM_EMAIL comEmail,
+				COM_LICENSE_CODE comLicenseCode,
+				COM_LICENSE_PIC comLicensePic,
+				COM_MOBILE comMobile,
+				COM_TEL comTel,
+				COM_PERSON comPerson,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				COM_LOGO comLogo,
+				COM_REMARK comRemark,
+				COM_ADDR comAddr,
+				REG_TIME regTime
+		FROM ${tablename} where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 按主键查询 -->
+	<select id="findByACCTID" parameterType="CustComInfo" resultType="CustComInfo">
+		<![CDATA[
+		SELECT 
+				ID id,
+				ACCT_ID acctId,
+				COM_NAME comName,
+				COM_EMAIL comEmail,
+				COM_LICENSE_CODE comLicenseCode,
+				COM_LICENSE_PIC comLicensePic,
+				COM_MOBILE comMobile,
+				COM_TEL comTel,
+				COM_PERSON comPerson,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				COM_LOGO comLogo,
+				COM_REMARK comRemark,
+				COM_ADDR comAddr,
+				REG_TIME regTime
+		FROM ${tablename} where ACCT_ID = #{acctId}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="CustComInfo">
+		<![CDATA[
+		SELECT 
+				ID id,
+				ACCT_ID acctId,
+				COM_NAME comName,
+				COM_EMAIL comEmail,
+				COM_LICENSE_CODE comLicenseCode,
+				COM_LICENSE_PIC comLicensePic,
+				COM_MOBILE comMobile,
+				COM_TEL comTel,
+				COM_PERSON comPerson,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				COM_LOGO comLogo,
+				COM_REMARK comRemark,
+				COM_ADDR comAddr,
+				REG_TIME regTime
+		FROM ${tablename} where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="CustComInfo" parameterType="CustComInfo">
+		<![CDATA[
+		SELECT 
+				ID id,
+				ACCT_ID acctId,
+				COM_NAME comName,
+				COM_EMAIL comEmail,
+				COM_LICENSE_CODE comLicenseCode,
+				COM_LICENSE_PIC comLicensePic,
+				COM_MOBILE comMobile,
+				COM_TEL comTel,
+				COM_PERSON comPerson,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				COM_LOGO comLogo,
+				COM_REMARK comRemark,
+				COM_ADDR comAddr,
+				REG_TIME regTime
+		FROM ${tablename} where 1=1 
+		]]>
+		
+		<if test="id != 0">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		
+		<if test="comName != null and comName != ''">
+			<![CDATA[
+			and COM_NAME = #{comName}
+			]]>
+		</if>
+		
+		
+		<if test="startregtime != null and startregtime != ''">
+			<![CDATA[
+			and REG_TIME >= #{startregtime}
+			]]>
+		</if>
+		<if test="endregtime != null and endregtime != ''">
+			<![CDATA[
+			and REG_TIME <= #{endregtime}
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="CustComInfo">
+		<![CDATA[
+		select count(*) from ${tablename} where 1=1 
+		]]>
+		
+		<if test="id != 0">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		
+		<if test="comName != null and comName != ''">
+			<![CDATA[
+			and COM_NAME = #{comName}
+			]]>
+		</if>
+		
+		
+		<if test="startregtime != null and startregtime != ''">
+			<![CDATA[
+			and REG_TIME >= #{startregtime}
+			]]>
+		</if>
+		<if test="endregtime != null and endregtime != ''">
+			<![CDATA[
+			and REG_TIME <= #{endregtime}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="CustComInfo" >
+		<![CDATA[
+		insert into ${tablename} (
+				ID,
+				ACCT_ID,
+				COM_NAME,
+				COM_EMAIL,
+				COM_LICENSE_CODE,
+				COM_LICENSE_PIC,
+				COM_MOBILE,
+				COM_TEL,
+				COM_PERSON,
+				COM_AUTHORIZE_PIC,
+				COM_LOGO,
+				COM_REMARK,
+				COM_ADDR,
+				REG_TIME
+		) values (
+				#{id},      
+				#{acctId},
+				#{comName},
+				#{comEmail},
+				#{comLicenseCode},
+				#{comLicensePic},
+				#{comMobile},
+				#{comTel},
+				#{comPerson},
+				#{comAuthorizePic},
+				#{comLogo},
+				#{comRemark},
+				#{comAddr},
+				#{regTime}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="CustComInfo">
+		<![CDATA[
+		update ${tablename} set
+				ACCT_ID = #{acctId},
+				COM_NAME = #{comName},
+				COM_EMAIL = #{comEmail},
+				COM_LICENSE_CODE = #{comLicenseCode},
+				COM_LICENSE_PIC = #{comLicensePic},
+				COM_MOBILE = #{comMobile},
+				COM_TEL = #{comTel},
+				COM_PERSON = #{comPerson},
+				COM_AUTHORIZE_PIC = #{comAuthorizePic},
+				COM_LOGO = #{comLogo},
+				COM_REMARK = #{comRemark},
+				COM_ADDR = #{comAddr},
+				REG_TIME = #{regTime}
+				where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="CustComInfo">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="CustComInfo">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

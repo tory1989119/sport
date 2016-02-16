@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.ActResultInfoMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="long" resultType="ActResultInfo">
+		<![CDATA[
+		select * from act_result_info where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="ActResultInfo">
+		<![CDATA[
+		select * from act_result_info where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="ActResultInfo" parameterType="ActResultInfo">
+		<![CDATA[
+		select * from act_result_info where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		<if test="actId != null">
+			<![CDATA[
+			and ACT_ID = #{actId}
+			]]>
+		</if>
+		<if test="matchId != null">
+			<![CDATA[
+			and MATCH_ID = #{matchId}
+			]]>
+		</if>
+		<if test="personId != null">
+			<![CDATA[
+			and PERSON_ID = #{personId}
+			]]>
+		</if>
+		<if test="matchRank != null and matchRank != ''">
+			<![CDATA[
+			and MATCH_RANK = #{matchRank}
+			]]>
+		</if>
+		<if test="matchTimeStartString != null and matchTimeStartString != ''">
+			<![CDATA[
+			and MATCH_TIME >= #{matchTimeStartString}
+			]]>
+		</if>
+		<if test="matchTimeEndString != null and matchTimeEndString != ''">
+			<![CDATA[
+			and MATCH_TIME <= #{matchTimeEndString}
+			]]>
+		</if>
+		<if test="matchRemark != null and matchRemark != ''">
+			<![CDATA[
+			and MATCH_REMARK = #{matchRemark}	
+			]]>
+		</if>			
+		<if test="awardStatus != null and awardStatus != ''">
+			<![CDATA[
+			and AWARD_STATUS = #{awardStatus}
+			]]>
+		</if>
+		<if test="awardTimeStartString != null and awardTimeStartString != ''">
+			<![CDATA[
+			and AWARD_TIME >= #{awardTimeStartString}
+			]]>
+		</if>
+		<if test="awardTimeEndString != null and awardTimeEndString != ''">
+			<![CDATA[
+			and AWARD_TIME <= #{awardTimeEndString}
+			]]>
+		</if>
+		<![CDATA[
+		limit #{index}, #{pageNum}
+		]]>
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="ActResultInfo">
+		<![CDATA[
+		select count(1) from act_result_info where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		<if test="actId != null">
+			<![CDATA[
+			and ACT_ID = #{actId}
+			]]>
+		</if>
+		<if test="matchId != null">
+			<![CDATA[
+			and MATCH_ID = #{matchId}
+			]]>
+		</if>
+		<if test="personId != null">
+			<![CDATA[
+			and PERSON_ID = #{personId}
+			]]>
+		</if>
+		<if test="matchRank != null and matchRank != ''">
+			<![CDATA[
+			and MATCH_RANK = #{matchRank}
+			]]>
+		</if>
+		<if test="matchTimeStartString != null and matchTimeStartString != ''">
+			<![CDATA[
+			and MATCH_TIME >= #{matchTimeStartString}
+			]]>
+		</if>
+		<if test="matchTimeEndString != null and matchTimeEndString != ''">
+			<![CDATA[
+			and MATCH_TIME <= #{matchTimeEndString}
+			]]>
+		</if>
+		<if test="matchRemark != null and matchRemark != ''">
+			<![CDATA[
+			and MATCH_REMARK = #{matchRemark}	
+			]]>
+		</if>			
+		<if test="awardStatus != null and awardStatus != ''">
+			<![CDATA[
+			and AWARD_STATUS = #{awardStatus}
+			]]>
+		</if>
+		<if test="awardTimeStartString != null and awardTimeStartString != ''">
+			<![CDATA[
+			and AWARD_TIME >= #{awardTimeStartString}
+			]]>
+		</if>
+		<if test="awardTimeEndString != null and awardTimeEndString != ''">
+			<![CDATA[
+			and AWARD_TIME <= #{awardTimeEndString}
+			]]>
+		</if>
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="ActResultInfo" >
+		<![CDATA[
+		insert into act_result_info (
+				ID
+				,ACT_ID
+				,MATCH_ID
+				,PERSON_ID
+				,MATCH_RANK
+				,MATCH_TIME
+				,MATCH_REMARK
+				,AWARD_STATUS
+				,AWARD_TIME
+		) values (
+				#{id}
+				,#{actId}
+				,#{matchId}
+				,#{personId}
+				,#{matchRank}
+				,#{matchTimeString}
+				,#{matchRemark}
+				,#{awardStatus}
+				,#{awardTimeString}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="ActResultInfo">
+		<![CDATA[
+		update act_result_info set
+				ID = #{id}	
+				,ACT_ID = #{actId}	
+				,MATCH_ID = #{matchId}	
+				,PERSON_ID = #{personId}	
+				,MATCH_RANK = #{matchRank}	
+				,MATCH_TIME = #{matchTimeString}
+				,MATCH_REMARK = #{matchRemark}	
+				,AWARD_STATUS = #{awardStatus}	
+				,AWARD_TIME = #{awardTimeString}
+		where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="ActResultInfo">
+		<![CDATA[
+		delete from act_result_info 
+		where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="long">
+		<![CDATA[
+		delete from act_result_info where
+			ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

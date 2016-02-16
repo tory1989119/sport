@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.ActJoinInfoMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="long" resultType="ActJoinInfo">
+		<![CDATA[
+		select * from act_join_info where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="ActJoinInfo">
+		<![CDATA[
+		select * from act_join_info where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="ActJoinInfo" parameterType="ActJoinInfo">
+		<![CDATA[
+		select * from act_join_info where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		<if test="personId != null">
+			<![CDATA[
+			and PERSON_ID = #{personId}
+			]]>
+		</if>
+		<if test="actId != null">
+			<![CDATA[
+			and ACT_ID = #{actId}
+			]]>
+		</if>
+		<if test="matchId != null">
+			<![CDATA[
+			and MATCH_ID = #{matchId}
+			]]>
+		</if>
+		<if test="joinStatus != null and joinStatus != ''">
+			<![CDATA[
+			and JOIN_STATUS = #{joinStatus}
+			]]>
+		</if>
+		<if test="joinType != null and joinType != ''">
+			<![CDATA[
+			and JOIN_TYPE = #{joinType}
+			]]>
+		</if>
+		<if test="groupInfo != null and groupInfo != ''">
+			<![CDATA[
+			and GROUP_INFO = #{groupInfo}	
+			]]>
+		</if>			
+		<if test="joinTimeStartString != null and joinTimeStartString != ''">
+			<![CDATA[
+			and JOIN_TIME >= #{joinTimeStartString}
+			]]>
+		</if>
+		<if test="joinTimeEndString != null and joinTimeEndString != ''">
+			<![CDATA[
+			and JOIN_TIME <= #{joinTimeEndString}
+			]]>
+		</if>
+		<![CDATA[
+		limit #{index}, #{pageNum}
+		]]>
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="ActJoinInfo">
+		<![CDATA[
+		select count(1) from act_join_info where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		<if test="personId != null">
+			<![CDATA[
+			and PERSON_ID = #{personId}
+			]]>
+		</if>
+		<if test="actId != null">
+			<![CDATA[
+			and ACT_ID = #{actId}
+			]]>
+		</if>
+		<if test="matchId != null">
+			<![CDATA[
+			and MATCH_ID = #{matchId}
+			]]>
+		</if>
+		<if test="joinStatus != null and joinStatus != ''">
+			<![CDATA[
+			and JOIN_STATUS = #{joinStatus}
+			]]>
+		</if>
+		<if test="joinType != null and joinType != ''">
+			<![CDATA[
+			and JOIN_TYPE = #{joinType}
+			]]>
+		</if>
+		<if test="groupInfo != null and groupInfo != ''">
+			<![CDATA[
+			and GROUP_INFO = #{groupInfo}	
+			]]>
+		</if>			
+		<if test="joinTimeStartString != null and joinTimeStartString != ''">
+			<![CDATA[
+			and JOIN_TIME >= #{joinTimeStartString}
+			]]>
+		</if>
+		<if test="joinTimeEndString != null and joinTimeEndString != ''">
+			<![CDATA[
+			and JOIN_TIME <= #{joinTimeEndString}
+			]]>
+		</if>
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="ActJoinInfo" >
+		<![CDATA[
+		insert into act_join_info (
+				ID
+				,PERSON_ID
+				,ACT_ID
+				,MATCH_ID
+				,JOIN_STATUS
+				,JOIN_TYPE
+				,GROUP_INFO
+				,JOIN_TIME
+		) values (
+				#{id}
+				,#{personId}
+				,#{actId}
+				,#{matchId}
+				,#{joinStatus}
+				,#{joinType}
+				,#{groupInfo}
+				,#{joinTimeString}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="ActJoinInfo">
+		<![CDATA[
+		update act_join_info set
+				ID = #{id}	
+				,PERSON_ID = #{personId}	
+				,ACT_ID = #{actId}	
+				,MATCH_ID = #{matchId}	
+				,JOIN_STATUS = #{joinStatus}	
+				,JOIN_TYPE = #{joinType}	
+				,GROUP_INFO = #{groupInfo}	
+				,JOIN_TIME = #{joinTimeString}
+		where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="ActJoinInfo">
+		<![CDATA[
+		delete from act_join_info 
+		where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="long">
+		<![CDATA[
+		delete from act_join_info where
+			ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

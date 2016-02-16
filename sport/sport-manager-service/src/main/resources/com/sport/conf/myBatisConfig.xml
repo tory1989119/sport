@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="Menu" type="com.sport.model.Menu" />
+		<typeAlias alias="Operator" type="com.sport.model.Operator" />
+		<typeAlias alias="Role" type="com.sport.model.Role" />
+		<typeAlias alias="Data" type="com.sport.model.Data" />
+		<typeAlias alias="Picture" type="com.sport.model.Picture" />
+		<typeAlias alias="Category" type="com.sport.model.Category" />
+		<typeAlias alias="Area" type="com.sport.model.Area" />
+		<typeAlias alias="Template" type="com.sport.model.Template" />
+		<typeAlias alias="Report" type="com.sport.model.Report" />
+		<typeAlias alias="Message" type="com.sport.model.Message" />
+	</typeAliases>
+</configuration>

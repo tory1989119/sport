@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="tymanagers" owner="wuxj"/>
+
+	<!-- 使用zookeeper注册中心暴露服务地址-->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" /> 
+
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- 声明需要暴露的服务接口 -->
+	
+	<!-- 角色 -->
+	<dubbo:service interface="com.sport.service.interf.IRoleService" ref="roleService" token="false"/>
+	<!-- 菜单-->
+	<dubbo:service interface="com.sport.service.interf.IMenuService" ref="menuService" token="false"/>
+	<!-- 操作员-->
+	<dubbo:service interface="com.sport.service.interf.IOperatorService" ref="operatorService" token="false"/>
+	<!-- 系统参数-->
+	<dubbo:service interface="com.sport.service.interf.IDataService" ref="dataService" token="false"/>
+	<!-- 首页大图-->
+	<dubbo:service interface="com.sport.service.interf.IPictureService" ref="pictureService" token="false"/>
+	<!-- 活动分类-->
+	<dubbo:service interface="com.sport.service.interf.ICategoryService" ref="categoryService" token="false"/>
+	<!-- 地区-->
+	<dubbo:service interface="com.sport.service.interf.IAreaService" ref="areaService" token="false"/>
+	<!-- 活动展示模板-->
+	<dubbo:service interface="com.sport.service.interf.ITemplateService" ref="templateService" token="false"/>
+	<!-- 举报-->
+	<dubbo:service interface="com.sport.service.interf.IReportService" ref="reportService" token="false"/>
+	<!-- 留言-->
+	<dubbo:service interface="com.sport.service.interf.IMessageService" ref="messageService" token="false"/>
+</beans>

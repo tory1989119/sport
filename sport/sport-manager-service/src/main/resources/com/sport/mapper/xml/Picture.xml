@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.PictureMapper">
+	<insert id="add" parameterType="Picture">
+		insert into ${tablename} (id,url,adate) values (#{id},#{url},#{adate})
+	</insert>
+	
+	<select id="get" parameterType="Picture" resultType="Picture">
+		select id,url,adate from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Picture">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Picture">
+		update ${tablename} set url = #{url} where id=#{id}
+	</update>
+</mapper>

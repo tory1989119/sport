@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.MessageMapper">
+	<insert id="add" parameterType="Message">
+		insert into ${tablename} (act_id,person_id,person_name,message,customer_id,customer_name,reply,mdate,rdate) values (#{actId},#{personId},#{personName},#{message},#{customerId},#{customerName},#{reply},#{mdate},#{rdate})
+	</insert>
+	
+	<select id="get" parameterType="Message" resultType="Message">
+		select id,act_id acctId,person_id personId,person_name personName,message,customer_id customerId,customer_name customerName,reply,mdate,rdate from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Message">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Message">
+		update ${tablename} set reply = #{reply}
+		
+		<if test="customerId != 0">
+			<![CDATA[
+				,customer_id = #{customerId} 
+			]]>
+		</if>
+		
+		<if test="customerName != null and customerName != '' ">
+			<![CDATA[
+				, customer_name = #{customerName} 
+			]]>
+		</if>
+		
+		<if test="rdate != null and rdate != '' ">
+			<![CDATA[
+				, rdate = #{rdate} 
+			]]>
+		</if>
+		
+		where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Message" resultType="Message">
+		select id,act_id actId,person_id personId,person_name personName,message,customer_id customerId,customer_name customerName,reply,mdate,rdate from ${tablename}  where 1=1
+		
+		<if test="actId != 0">
+			<![CDATA[
+				and act_id = #{actId}
+			]]>
+		</if>
+		
+		<if test="personId != 0">
+			<![CDATA[
+				and person_id = #{personId}
+			]]>
+		</if>
+		
+		<if test="customerId != 0">
+			<![CDATA[
+				and customer_id = #{customerId}
+			]]>
+		</if>
+		
+		<if test="startdate != null and startdate != ''">
+			<![CDATA[
+			and mdate >= #{startdate}
+			]]>
+		</if>
+		
+		<if test="enddate != null and enddate != ''">
+			<![CDATA[
+			and mdate <= #{enddate}
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Message" resultType="java.lang.Integer">
+		select count(1) from ${tablename}  where 1=1
+		
+		<if test="actId != 0">
+			<![CDATA[
+				and act_id = #{actId}
+			]]>
+		</if>
+		
+		<if test="personId != 0">
+			<![CDATA[
+				and person_id = #{personId}
+			]]>
+		</if>
+		
+		<if test="customerId != 0">
+			<![CDATA[
+				and customer_id = #{customerId}
+			]]>
+		</if>
+		
+		<if test="startdate != null and startdate != ''">
+			<![CDATA[
+			and mdate >= #{startdate}
+			]]>
+		</if>
+		
+		<if test="enddate != null and enddate != ''">
+			<![CDATA[
+			and mdate <= #{enddate}
+			]]>
+		</if>
+	</select>
+</mapper>

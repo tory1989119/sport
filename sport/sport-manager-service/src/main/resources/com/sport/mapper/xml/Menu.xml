@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.MenuMapper">
+	<insert id="add" parameterType="Menu">
+		insert into ${tablename} (menuid,urlname,url,grade,fid,sort) values(#{menuid},#{urlname},#{url},#{grade},#{fid},#{sort})
+	</insert>
+	
+	<select id="get" parameterType="Menu" resultType="Menu">
+		select id,menuid,urlname,url,grade,fid,sort from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Menu">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Menu">
+		update ${tablename} set menuid = #{menuid},urlname = #{urlname},url = #{url},sort = #{sort} where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Menu" resultType="Menu">
+		select id,menuid,urlname,url,grade,fid,sort from ${tablename}  
+		where grade = #{grade} 
+		
+		<if test="fid != null and fid != ''">
+			<![CDATA[
+			and fid = #{fid} 
+			]]>
+		</if>
+		
+		order by sort
+	</select>
+</mapper>

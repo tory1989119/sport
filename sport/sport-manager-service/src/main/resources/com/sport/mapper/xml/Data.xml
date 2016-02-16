@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.DataMapper">
+	<insert id="add" parameterType="Data">
+		insert into ${tablename} (dataid,dataname,grade,fid) values(#{dataid},#{dataname},#{grade},#{fid})
+	</insert>
+	
+	<select id="get" parameterType="Data" resultType="Data">
+		select id,dataid,dataname,grade,fid from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Data">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Data">
+		update ${tablename} set dataid = #{dataid},dataname = #{dataname} where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Data" resultType="Data">
+		select id,dataid,dataname,grade,fid from ${tablename}  
+		where grade = #{grade} 
+		
+		<if test="fid != null and fid != ''">
+			<![CDATA[
+			and fid = #{fid} 
+			]]>
+		</if>
+	</select>
+</mapper>

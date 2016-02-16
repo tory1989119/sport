@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.CustComApplyMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="CustComApply" resultType="CustComApply">
+		<![CDATA[
+		SELECT 	ACCT_ID acctId,
+				COM_ID comId,
+				COM_LOGO comLogo,
+				APPLY_DATE applyDate,
+				APPLY_STATUS applyStatus,
+				COM_LICENSE_PIC comLicensePic,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				NOTE note
+		 FROM ${tablename} where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="CustComApply">
+		<![CDATA[
+		SELECT 	ACCT_ID acctId,
+				COM_ID comId,
+				COM_LOGO comLogo,
+				APPLY_DATE applyDate,
+				APPLY_STATUS applyStatus,
+				COM_LICENSE_PIC comLicensePic,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				NOTE note
+		 FROM ${tablename} where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="CustComApply" parameterType="CustComApply">
+		<![CDATA[
+		SELECT 	ACCT_ID acctId,
+				COM_ID comId,
+				COM_LOGO comLogo,
+				APPLY_DATE applyDate,
+				APPLY_STATUS applyStatus,
+				COM_LICENSE_PIC comLicensePic,
+				COM_AUTHORIZE_PIC comAuthorizePic,
+				NOTE note
+		 FROM ${tablename} where 1=1 
+		]]>
+		
+		<if test="acctId != 0">
+			<![CDATA[
+			and ACCT_ID = #{acctId}
+			]]>
+		</if>
+		
+		<if test="comId != 0">
+			<![CDATA[
+			and COM_ID = #{comId}
+			]]>
+		</if>		
+		
+		<if test="startapplydate != null and startapplydate != ''">
+			<![CDATA[
+			and APPLY_DATE >= #{startapplydate}
+			]]>
+		</if>
+		<if test="endapplydate != null and endapplydate != ''">
+			<![CDATA[
+			and APPLY_DATE <= #{endapplydate}
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="CustComApply">
+		<![CDATA[
+		select count(*) from ${tablename} where 1=1 
+		]]>
+		
+		<if test="acctId != 0">
+			<![CDATA[
+			and ACCT_ID = #{acctId}
+			]]>
+		</if>
+		
+		<if test="comId != 0">
+			<![CDATA[
+			and COM_ID = #{comId}
+			]]>
+		</if>		
+		
+		<if test="startapplydate != null and startapplydate != ''">
+			<![CDATA[
+			and APPLY_DATE >= #{startapplydate}
+			]]>
+		</if>
+		<if test="endapplydate != null and endapplydate != ''">
+			<![CDATA[
+			and APPLY_DATE <= #{endapplydate}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="CustComApply" >
+		<![CDATA[
+		insert into ${tablename} (
+				ACCT_ID,
+				COM_ID,
+				COM_LOGO,
+				APPLY_DATE,
+				APPLY_STATUS,
+				COM_LICENSE_PIC,
+				COM_AUTHORIZE_PIC,
+				NOTE
+		) values (
+				#{acctId},
+				#{comId},
+				#{comLogo},
+				#{applyDate},
+				#{applyStatus},
+				#{comLicensePic},
+				#{comAuthorizePic},
+				#{note}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="CustComApply">
+		<![CDATA[
+		update ${tablename} set
+				APPLY_STATUS = #{applyStatus},
+				NOTE = #{note}
+				where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="CustComApply">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="CustComApply">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

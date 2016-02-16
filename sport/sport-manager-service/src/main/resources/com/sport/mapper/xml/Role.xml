@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.RoleMapper">
+	<insert id="add" parameterType="Role">
+		insert into ${tablename} (rolename,authority,adate) values (#{rolename},#{authority},#{adate})
+	</insert>
+	
+	<select id="get" parameterType="Role" resultType="Role">
+		select id,rolename,authority,adate from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Role">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Role">
+		update ${tablename} set rolename = #{rolename} 
+		
+		<if test="authority != null and authority != '' ">
+			<![CDATA[
+				, authority = #{authority} 
+			]]>
+		</if>
+		
+		where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Role" resultType="Role">
+		select id,rolename,authority,adate from ${tablename}  where 1=1
+		
+		<if test="rolename != null and rolename != '' ">
+			<![CDATA[
+				and rolename like CONCAT('','${rolename}','%')
+			]]>
+		</if>
+		
+		<if test="startadate != null and startadate != ''">
+			<![CDATA[
+			and adate >= #{startadate}
+			]]>
+		</if>
+		<if test="endadate != null and endadate != ''">
+			<![CDATA[
+			and adate <= #{endadate}
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Role" resultType="java.lang.Integer">
+		select count(1) from ${tablename}  where 1=1
+		
+		<if test="rolename != null and rolename != '' ">
+			<![CDATA[
+				and rolename like CONCAT('','${rolename}','%')
+			]]>
+		</if>
+		
+		<if test="startadate != null and startadate != ''">
+			<![CDATA[
+			and adate >= #{startadate}
+			]]>
+		</if>
+		<if test="endadate != null and endadate != ''">
+			<![CDATA[
+			and adate <= #{endadate}
+			]]>
+		</if>
+	</select>
+</mapper>

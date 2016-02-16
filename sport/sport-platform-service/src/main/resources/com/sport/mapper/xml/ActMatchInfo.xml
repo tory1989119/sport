@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.ActMatchInfoMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="long" resultType="ActMatchInfo">
+		<![CDATA[
+		select * from act_match_info where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="ActMatchInfo">
+		<![CDATA[
+		select * from act_match_info where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="ActMatchInfo" parameterType="ActMatchInfo">
+		<![CDATA[
+		select * from act_match_info where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		<if test="actId != null">
+			<![CDATA[
+			and ACT_ID = #{actId}
+			]]>
+		</if>
+		<if test="actCode != null and actCode != ''">
+			<![CDATA[
+			and ACT_CODE = #{actCode}
+			]]>
+		</if>
+		<if test="actName != null and actName != ''">
+			<![CDATA[
+			and ACT_NAME = #{actName}
+			]]>
+		</if>
+		<if test="matchName != null and matchName != ''">
+			<![CDATA[
+			and MATCH_NAME = #{matchName}
+			]]>
+		</if>
+		<if test="matchRule != null and matchRule != ''">
+			<![CDATA[
+			and MATCH_RULE = #{matchRule}	
+			]]>
+		</if>			
+		<if test="matchRemark != null and matchRemark != ''">
+			<![CDATA[
+			and MATCH_REMARK = #{matchRemark}	
+			]]>
+		</if>			
+		<if test="matchLevel1 != null and matchLevel1 != ''">
+			<![CDATA[
+			and MATCH_LEVEL1 = #{matchLevel1}
+			]]>
+		</if>
+		<if test="matchLevel2 != null and matchLevel2 != ''">
+			<![CDATA[
+			and MATCH_LEVEL2 = #{matchLevel2}
+			]]>
+		</if>
+		<if test="matchLevel3 != null and matchLevel3 != ''">
+			<![CDATA[
+			and MATCH_LEVEL3 = #{matchLevel3}
+			]]>
+		</if>
+		<if test="reward != null and reward != ''">
+			<![CDATA[
+			and REWARD = #{reward}	
+			]]>
+		</if>			
+		<![CDATA[
+		limit #{index}, #{pageNum}
+		]]>
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="ActMatchInfo">
+		<![CDATA[
+		select count(1) from act_match_info where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		<if test="actId != null">
+			<![CDATA[
+			and ACT_ID = #{actId}
+			]]>
+		</if>
+		<if test="actCode != null and actCode != ''">
+			<![CDATA[
+			and ACT_CODE = #{actCode}
+			]]>
+		</if>
+		<if test="actName != null and actName != ''">
+			<![CDATA[
+			and ACT_NAME = #{actName}
+			]]>
+		</if>
+		<if test="matchName != null and matchName != ''">
+			<![CDATA[
+			and MATCH_NAME = #{matchName}
+			]]>
+		</if>
+		<if test="matchRule != null and matchRule != ''">
+			<![CDATA[
+			and MATCH_RULE = #{matchRule}	
+			]]>
+		</if>			
+		<if test="matchRemark != null and matchRemark != ''">
+			<![CDATA[
+			and MATCH_REMARK = #{matchRemark}	
+			]]>
+		</if>			
+		<if test="matchLevel1 != null and matchLevel1 != ''">
+			<![CDATA[
+			and MATCH_LEVEL1 = #{matchLevel1}
+			]]>
+		</if>
+		<if test="matchLevel2 != null and matchLevel2 != ''">
+			<![CDATA[
+			and MATCH_LEVEL2 = #{matchLevel2}
+			]]>
+		</if>
+		<if test="matchLevel3 != null and matchLevel3 != ''">
+			<![CDATA[
+			and MATCH_LEVEL3 = #{matchLevel3}
+			]]>
+		</if>
+		<if test="reward != null and reward != ''">
+			<![CDATA[
+			and REWARD = #{reward}	
+			]]>
+		</if>			
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="ActMatchInfo" >
+		<![CDATA[
+		insert into act_match_info (
+				ID
+				,ACT_ID
+				,ACT_CODE
+				,ACT_NAME
+				,MATCH_NAME
+				,MATCH_RULE
+				,MATCH_REMARK
+				,MATCH_LEVEL1
+				,MATCH_LEVEL2
+				,MATCH_LEVEL3
+				,REWARD
+		) values (
+				#{id}
+				,#{actId}
+				,#{actCode}
+				,#{actName}
+				,#{matchName}
+				,#{matchRule}
+				,#{matchRemark}
+				,#{matchLevel1}
+				,#{matchLevel2}
+				,#{matchLevel3}
+				,#{reward}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="ActMatchInfo">
+		<![CDATA[
+		update act_match_info set
+				ID = #{id}	
+				,ACT_ID = #{actId}	
+				,ACT_CODE = #{actCode}	
+				,ACT_NAME = #{actName}	
+				,MATCH_NAME = #{matchName}	
+				,MATCH_RULE = #{matchRule}	
+				,MATCH_REMARK = #{matchRemark}	
+				,MATCH_LEVEL1 = #{matchLevel1}	
+				,MATCH_LEVEL2 = #{matchLevel2}	
+				,MATCH_LEVEL3 = #{matchLevel3}	
+				,REWARD = #{reward}	
+		where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="ActMatchInfo">
+		<![CDATA[
+		delete from act_match_info 
+		where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="long">
+		<![CDATA[
+		delete from act_match_info where
+			ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

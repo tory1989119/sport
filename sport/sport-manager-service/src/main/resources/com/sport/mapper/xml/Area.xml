@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.AreaMapper">
+	<insert id="add" parameterType="Area">
+		insert into ${tablename} (areaid,areaname,grade,fid) values(#{areaid},#{areaname},#{grade},#{fid})
+	</insert>
+	
+	<select id="get" parameterType="Area" resultType="Area">
+		select id,areaid,areaname,grade,fid from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Area">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Area">
+		update ${tablename} set areaid = #{areaid},areaname = #{areaname} where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Area" resultType="Area">
+		select id,areaid,areaname,grade,fid from ${tablename} where 1=1
+		
+		<if test="grade != null and grade != ''">
+			<![CDATA[
+				and grade = #{grade} 
+			]]>
+		</if>
+		
+		<if test="areaid != null and areaid != ''">
+			<![CDATA[
+				and areaid = #{areaid} 
+			]]>
+		</if>
+		
+		<if test="areaname != null and areaname != ''">
+			<![CDATA[
+				and areaname like CONCAT('','${areaname}','%')
+			]]>
+		</if>
+		
+		<if test="fid != null and fid != ''">
+			<![CDATA[
+				and fid = #{fid} 
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+		
+	</select>
+	
+	<select id="count" parameterType="Area" resultType="java.lang.Integer">
+		select count(*) from ${tablename}   where 1=1
+		
+		<if test="grade != null and grade != ''">
+			<![CDATA[
+				and grade = #{grade} 
+			]]>
+		</if>
+		
+		<if test="areaid != null and areaid != ''">
+			<![CDATA[
+				and areaid = #{areaid} 
+			]]>
+		</if>
+		
+		<if test="areaname != null and areaname != ''">
+			<![CDATA[
+				and areaname like CONCAT('','${areaname}','%')
+			]]>
+		</if>
+		
+		<if test="fid != null and fid != ''">
+			<![CDATA[
+				and fid = #{fid} 
+			]]>
+		</if>
+		
+		</select>
+		
+		<select id="max" parameterType="Area" resultType="java.lang.String">
+		select max(areaid) from ${tablename}   where 1=1
+		
+		<if test="grade != null and grade != ''">
+			<![CDATA[
+				and grade = #{grade} 
+			]]>
+		</if>
+		
+		<if test="areaid != null and areaid != ''">
+			<![CDATA[
+				and areaid = #{areaid} 
+			]]>
+		</if>
+		
+		<if test="areaname != null and areaname != ''">
+			<![CDATA[
+				and areaname like CONCAT('','${areaname}','%')
+			]]>
+		</if>
+		
+		<if test="fid != null and fid != ''">
+			<![CDATA[
+				and fid = #{fid} 
+			]]>
+		</if>
+		
+	</select>
+</mapper>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.ActBaseInfoMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="ActBaseInfo" resultType="ActBaseInfo">
+		<![CDATA[
+		select * from ${tablename} where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="ActBaseInfo">
+		<![CDATA[
+		select * from ${tablename} where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="ActBaseInfo" parameterType="ActBaseInfo">
+		<![CDATA[
+		select * from ${tablename} where 1=1 
+		]]>
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="ActBaseInfo">
+		<![CDATA[
+		select count(1) from ${tablename} where 1=1 
+		]]>
+		
+		<if test="id != null">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="ActBaseInfo" >
+		<![CDATA[
+		insert into ${tablename} (
+				COM_ID,
+				COM_NAME,
+				ACT_NAME,
+				ACT_TITLE,
+				ACT_THEME_PC,
+				ACT_THEME_MOBILE,
+				JOIN_RULE,
+				JOIN_COST,
+				JOIN_COST_UNIT,
+				JOIN_START,
+				JOIN_END,
+				HOLD_START,
+				HOLD_END,
+				ACT_PERSON,
+				ACT_PERSON_MOBILE,
+				ACT_CONTRACTOR,
+				ACT_SPONSOR,
+				ACT_PERSON_NUMBER,
+				ACT_REMARK,
+				REWARD,
+				ACT_ADDR,
+				CREATE_TIME,
+				ACT_STATUS
+		) values (
+				#{comId},
+				#{comName},
+				#{actName},
+				#{actTitle},
+				#{actThemePc},
+				#{actThemeMobile},
+				#{joinRule},
+				#{joinCost},
+				#{joinCostUnit},
+				#{strjoinstart},
+				#{strjoinend},
+				#{strholdstart},
+				#{strholdend},
+				#{actPerson},
+				#{actPersonMobile},
+				#{actContractor},
+				#{actSponsor},
+				#{actPersonNumber},
+				#{actRemark},
+				#{reward},
+				#{actAddr},
+				#{createTime},
+				#{actStatus}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="ActBaseInfo">
+		<![CDATA[
+		update ${tablename} set
+				COM_ID = #{comId},
+				COM_NAME = #{comName},
+				ACT_NAME = #{actName},
+				ACT_TITLE = #{actTitle},
+				ACT_THEME_PC = #{actThemePc},
+				ACT_THEME_MOBILE = #{actThemeMobile},
+				JOIN_RULE = #{joinRule},
+				JOIN_COST = #{joinCost},
+				JOIN_COST_UNIT = #{joinCostUnit},
+				JOIN_START = #{strjoinstart},
+				JOIN_END = #{strjoinend},
+				HOLD_START = #{strholdstart},
+				HOLD_END = #{strholdend},
+				ACT_PERSON = #{actPerson},
+				ACT_PERSON_MOBILE = #{actPersonMobile},
+				ACT_CONTRACTOR = #{actContractor},
+				ACT_SPONSOR = #{actSponsor},
+				ACT_PERSON_NUMBER = #{actPersonNumber},
+				ACT_REMARK = #{actRemark},
+				REWARD = #{reward},
+				ACT_ADDR = #{actAddr},
+				CREATE_TIME = #{createTime},
+				ACT_STATUS = #{actStatus}
+				
+				where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="ActBaseInfo">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="ActBaseInfo">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

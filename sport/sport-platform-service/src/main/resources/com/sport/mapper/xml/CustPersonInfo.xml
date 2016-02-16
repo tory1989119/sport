@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.CustPersonInfoMapper">
+
+	<!-- 按主键查询 -->
+	<select id="findByPK" parameterType="CustPersonInfo" resultType="CustPersonInfo">
+		<![CDATA[
+		SELECT
+			ID id,
+			ACCT_ID acctId,
+			REAL_NAME realName,
+			CARD_ID cardId,
+			PER_EMAIL perEmail,
+			PER_TEL perTel,
+			PER_MOBILE perMobile,
+			PER_SEX perSex,
+			PER_WECHAT perWechat,
+			PER_QQ perQq,
+			PER_HOBBY perHobby,
+			PER_AGE perAge,
+			PER_ADDR perAddr,
+			REG_TIME regTime
+ 		FROM ${tablename} where ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 按账号查询 -->
+	<select id="findByACCTID" parameterType="CustPersonInfo" resultType="CustPersonInfo">
+		<![CDATA[
+		SELECT
+			ID id,
+			ACCT_ID acctId,
+			REAL_NAME realName,
+			CARD_ID cardId,
+			PER_EMAIL perEmail,
+			PER_TEL perTel,
+			PER_MOBILE perMobile,
+			PER_SEX perSex,
+			PER_WECHAT perWechat,
+			PER_QQ perQq,
+			PER_HOBBY perHobby,
+			PER_AGE perAge,
+			PER_ADDR perAddr,
+			REG_TIME regTime
+ 		FROM ${tablename} where ACCT_ID = #{acctId}
+		]]>
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findAll" resultType="CustPersonInfo">
+		<![CDATA[
+		SELECT
+			ID id,
+			ACCT_ID acctId,
+			REAL_NAME realName,
+			CARD_ID cardId,
+			PER_EMAIL perEmail,
+			PER_TEL perTel,
+			PER_MOBILE perMobile,
+			PER_SEX perSex,
+			PER_WECHAT perWechat,
+			PER_QQ perQq,
+			PER_HOBBY perHobby,
+			PER_AGE perAge,
+			PER_ADDR perAddr,
+			REG_TIME regTime
+ 		FROM ${tablename} where 1=1 
+		]]>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultType="CustPersonInfo" parameterType="CustPersonInfo">
+		<![CDATA[
+		SELECT
+			ID id,
+			ACCT_ID acctId,
+			REAL_NAME realName,
+			CARD_ID cardId,
+			PER_EMAIL perEmail,
+			PER_TEL perTel,
+			PER_MOBILE perMobile,
+			PER_SEX perSex,
+			PER_WECHAT perWechat,
+			PER_QQ perQq,
+			PER_HOBBY perHobby,
+			PER_AGE perAge,
+			PER_ADDR perAddr,
+			REG_TIME regTime
+ 		FROM ${tablename} where 1=1 
+		]]>
+		
+		<if test="id != 0">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		
+		<if test="realName != null and realName != ''">
+			<![CDATA[
+			and REAL_NAME = #{realName}
+			]]>
+		</if>
+		
+		
+		<if test="startregtime != null and startregtime != ''">
+			<![CDATA[
+			and REG_TIME >= #{startregtime}
+			]]>
+		</if>
+		<if test="endregtime != null and endregtime != ''">
+			<![CDATA[
+			and REG_TIME <= #{endregtime}
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+		
+		
+	</select>
+	
+	<!-- count查询 -->
+	<select id="count" resultType="INTEGER" parameterType="CustPersonInfo">
+		<![CDATA[
+		select count(*) from ${tablename} where 1=1 
+		]]>
+		
+		<if test="id != 0">
+			<![CDATA[
+			and ID = #{id}
+			]]>
+		</if>
+		
+		<if test="realName != null and realName != ''">
+			<![CDATA[
+			and REAL_NAME = #{realName}
+			]]>
+		</if>
+		
+		
+		<if test="startregtime != null and startregtime != ''">
+			<![CDATA[
+			and REG_TIME >= #{startregtime}
+			]]>
+		</if>
+		<if test="endregtime != null and endregtime != ''">
+			<![CDATA[
+			and REG_TIME <= #{endregtime}
+			]]>
+		</if>
+		
+	</select>
+	
+	<!-- 通用保存方法 -->
+	<insert id="save" parameterType="CustPersonInfo" >
+		<![CDATA[
+		insert into ${tablename} (
+				ACCT_ID,
+				REAL_NAME,
+				CARD_ID,
+				PER_EMAIL,
+				PER_TEL,
+				PER_MOBILE,
+				PER_SEX,
+				PER_WECHAT,
+				PER_QQ,
+				PER_HOBBY,
+				PER_AGE,
+				PER_ADDR,
+				REG_TIME
+		) values (
+				#{acctId},
+				#{realName},
+				#{cardId},
+				#{perEmail},
+				#{perTel},
+				#{perMobile},
+				#{perSex},
+				#{perWechat},
+				#{perQq},
+				#{perHobby},
+				#{perAge},
+				#{perAddr},
+				#{regTime}
+		)
+		]]>
+	</insert>
+	
+	<!-- 通用更新方法 -->
+	<update id="update" parameterType="CustPersonInfo">
+		<![CDATA[
+		update ${tablename} set
+				ACCT_ID = #{acctId},
+				REAL_NAME = #{realName},
+				CARD_ID = #{cardId},
+				PER_EMAIL = #{perEmail},
+				PER_TEL = #{perTel},
+				PER_MOBILE = #{perMobile},
+				PER_SEX = #{perSex},
+				PER_WECHAT = #{perWechat},
+				PER_QQ = #{perQq},
+				PER_HOBBY = #{perHobby},
+				PER_AGE = #{perAge},
+				PER_ADDR = #{perAddr},
+				REG_TIME = #{regTime}
+				
+				where ID = #{id}
+		]]>
+	</update>
+	
+	<!-- 通用删除 -->
+	<delete id="delete" parameterType="CustPersonInfo">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+	<!-- 通用删除 -->
+	<delete id="deleteByPK" parameterType="CustPersonInfo">
+		<![CDATA[
+		delete from ${tablename} where ID = #{id}
+		]]>
+	</delete>
+	
+</mapper>

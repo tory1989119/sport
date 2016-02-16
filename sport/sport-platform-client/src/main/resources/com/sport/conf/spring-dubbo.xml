@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="tymanagerc" owner="wuxj"/>
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
+	
+	<dubbo:consumer timeout="15000" retries="0"/>
+
+	<!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->
+	
+	<!-- 系统参数-->
+	<dubbo:reference id="idataService" interface="com.sport.service.interf.IDataService" />
+	<!-- 首页大图-->
+	<dubbo:reference id="ipictureService" interface="com.sport.service.interf.IPictureService" />
+	<!-- 活动分类-->
+	<dubbo:reference id="icategoryService" interface="com.sport.service.interf.ICategoryService" />
+	<!-- 地区-->
+	<dubbo:reference id="iareaService" interface="com.sport.service.interf.IAreaService" />
+	<!-- 活动展示模板-->
+	<dubbo:reference id="itemplateService" interface="com.sport.service.interf.ITemplateService" />
+	<!-- 举报-->
+	<dubbo:reference id="ireportService" interface="com.sport.service.interf.IReportService" />
+	<!-- 留言-->
+	<dubbo:reference id="imessageService" interface="com.sport.service.interf.IMessageService" />
+	
+	
+	<!-- 会员信息-->
+	<dubbo:reference id="icustPersonInfoService" interface="com.sport.service.interf.ICustPersonInfoService" />
+	<!-- 主办方信息-->
+	<dubbo:reference id="icustComInfoService" interface="com.sport.service.interf.ICustComInfoService" />
+	<!-- 主办方审核-->
+	<dubbo:reference id="icustComApplyService" interface="com.sport.service.interf.ICustComApplyService" />
+	<!-- 账户-->
+	<dubbo:reference id="iacctInfoService" interface="com.sport.service.interf.IAcctInfoService" />
+	<!-- 登录日志-->
+	<dubbo:reference id="iacctLoginLogService" interface="com.sport.service.interf.IAcctLoginLogService" />
+	<!-- 登录日志-->
+	<dubbo:reference id="iactBaseInfoService" interface="com.sport.service.interf.IActBaseInfoService" />
+	
+	
+	
+	
+</beans>

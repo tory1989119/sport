@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sport.mapper.ReportMapper">
+	<insert id="add" parameterType="Report">
+		insert into ${tablename} (act_id,person_id,person_name,report,customer_id,customer_name,reply,jdate,rdate) values (#{actId},#{personId},#{personName},#{report},#{customerId},#{customerName},#{reply},#{jdate},#{rdate})
+	</insert>
+	
+	<select id="get" parameterType="Report" resultType="Report">
+		select id,act_id actId,person_id personId,person_name personName,report,customer_id customerId,customer_name customerName,reply,jdate,rdate from ${tablename} where id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="Report">
+		delete from ${tablename} where id=#{id} 
+	</delete>
+	
+	<update id="update" parameterType="Report">
+		update ${tablename} set reply = #{reply}
+		
+		<if test="customerId != 0">
+			<![CDATA[
+				,customer_id = #{customerId} 
+			]]>
+		</if>
+		
+		<if test="customerName != null and customerName != '' ">
+			<![CDATA[
+				, customer_name = #{customerName} 
+			]]>
+		</if>
+		
+		<if test="rdate != null and rdate != '' ">
+			<![CDATA[
+				, rdate = #{rdate} 
+			]]>
+		</if>
+		
+		where id=#{id}
+	</update>
+	
+	<select id="find" parameterType="Report" resultType="Report">
+		select id,act_id actId,person_id personId,person_name personName,report,customer_id customerId,customer_name customerName,reply,jdate,rdate from ${tablename}  where 1=1
+		
+		<if test="actId != 0">
+			<![CDATA[
+				and act_id = #{actId}
+			]]>
+		</if>
+		
+		<if test="personId != 0">
+			<![CDATA[
+				and person_id = #{personId}
+			]]>
+		</if>
+		
+		<if test="customerId != 0">
+			<![CDATA[
+				and customer_id = #{customerId}
+			]]>
+		</if>
+		
+		<if test="startdate != null and startdate != ''">
+			<![CDATA[
+			and jdate >= #{startdate}
+			]]>
+		</if>
+		<if test="enddate != null and enddate != ''">
+			<![CDATA[
+			and jdate <= #{enddate}
+			]]>
+		</if>
+		
+		<if test="length != 0" >
+			<![CDATA[
+				limit #{start} , #{length}
+			]]>
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Report" resultType="java.lang.Integer">
+		select count(1) from ${tablename}  where 1=1
+		
+		<if test="actId != 0">
+			<![CDATA[
+				and act_id = #{actId}
+			]]>
+		</if>
+		
+		<if test="personId != 0">
+			<![CDATA[
+				and person_id = #{personId}
+			]]>
+		</if>
+		
+		<if test="customerId != 0">
+			<![CDATA[
+				and customer_id = #{customerId}
+			]]>
+		</if>
+		
+		<if test="startdate != null and startdate != ''">
+			<![CDATA[
+				and jdate >= #{startdate}
+			]]>
+		</if>
+		<if test="enddate != null and enddate != ''">
+			<![CDATA[
+				and jdate <= #{enddate}
+			]]>
+		</if>
+	</select>
+</mapper>

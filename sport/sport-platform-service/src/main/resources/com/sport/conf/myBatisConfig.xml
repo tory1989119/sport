@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="ActAwardInfo" type="com.sport.model.ActAwardInfo" />
+		<typeAlias alias="ActBaseInfo" type="com.sport.model.ActBaseInfo" />
+		<typeAlias alias="ActJoinInfo" type="com.sport.model.ActJoinInfo" />
+		<typeAlias alias="ActMatchInfo" type="com.sport.model.ActMatchInfo" />
+		<typeAlias alias="ActResultInfo" type="com.sport.model.ActResultInfo" />
+		
+		<typeAlias alias="CustComInfo" type="com.sport.model.CustComInfo" />
+		<typeAlias alias="CustPersonInfo" type="com.sport.model.CustPersonInfo" />
+		<typeAlias alias="CustComApply" type="com.sport.model.CustComApply" />
+		<typeAlias alias="AcctInfo" type="com.sport.model.AcctInfo" />
+		<typeAlias alias="AcctLoginLog" type="com.sport.model.AcctLoginLog" />
+	</typeAliases>
+</configuration>
